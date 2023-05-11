@@ -10,7 +10,7 @@ import { LoginPage } from '../pages/login.page'
 /** @type {{username: string, password: string}} */
 const standard = Cypress.env('users').standard
 if(!standard) {
-  throw new Error('Missing the statndard user')
+  throw new Error('Missing the standard user')
 }
 
 /** @type {{username: string, password: string}} */
