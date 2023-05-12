@@ -30,6 +30,7 @@ export const LoginPage = {
                 .should('equal', '/inventory.html')
         })
         cy.visit('/inventory.html')
+        cy.location('pathname').should('equal', '/inventory.html')
     },
     noErrors(){
         cy.log('** check that there are no errors **')

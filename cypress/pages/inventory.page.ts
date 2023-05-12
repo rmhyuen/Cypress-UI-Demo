@@ -14,6 +14,9 @@ export const InventoryPage = {
     getShoppingCartBadge(){
         return InventoryPage.getShoppingCartLink().find('.shopping_cart_badge')
     },
+    getInventoryItemRemoveButtons(){
+        return cy.get('.inventory_item:contains("Remove")')
+    },
     /**
      * 
      * @param {'a-z', 'z-a', 'lohi', 'hilo'} order 

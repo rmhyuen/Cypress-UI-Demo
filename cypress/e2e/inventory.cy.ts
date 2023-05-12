@@ -91,7 +91,7 @@ describe('Swag Labs', { viewportHeight: 1200 }, () => {
         .scrollIntoView()
         .and('be.visible')
 
-      cy.get('.inventory_item:contains("Remove")').should('have.length', 2)
+      InventoryPage.getInventoryItemRemoveButtons().should('have.length', 2)
     })
   })
 })
