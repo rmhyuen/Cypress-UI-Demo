@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "types": ["cypress", "cypress-map"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2016",
+    "strict": true,
+    "allowJs": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "cypress/e2e/*.js", 
+    "cypress/e2e/*.ts",
+    "cypress/**/*",
+    "fixtures/**/*"
+  ]
+}

@@ -1,10 +1,3 @@
-// enables typescript checking in javascript files
-// @ts-check
-
-// enables intelligent code completion for Cypress commands
-// https://on.cypress.io/intelligent-code-completion
-/// <reference types='cypress' />
-
 import { LoginPage } from '../pages/login.page'
 
 /** @type {{username: string, password: string}} */

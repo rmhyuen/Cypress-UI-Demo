@@ -18,7 +18,7 @@ export const InventoryPage = {
      * 
      * @param {'a-z', 'z-a', 'lohi', 'hilo'} order 
      */
-    sortBy(order){
+    sortBy(order: string){
         expect(order, 'sort order').to.be.oneOf(['az', 'za', 'lohi', 'hilo'])
         cy.log(`** sort by ${order} **`)
         return InventoryPage.getProductSortContainer()
@@ -41,7 +41,7 @@ export const InventoryPage = {
             .map('innerText')
             .print('names %o')
     },
-    addItemToCart(inventoryItemName){
+    addItemToCart(inventoryItemName: string){
         cy.log(`** add "${inventoryItemName}" to cart **`)
         return cy.contains('.inventory_item', inventoryItemName)
         .within(() => {

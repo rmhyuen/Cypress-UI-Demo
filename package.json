@@ -26,7 +26,8 @@
     "cypress-map": "^1.19.1",
     "prettier": "^2.8.3",
     "prop-types": "^15.7.2",
-    "start-server-and-test": "^2.0.0"
+    "start-server-and-test": "^2.0.0",
+    "typescript": "^5.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,7 +36,8 @@
     "test": "cypress run",
     "cy:open": "cypress open --e2e",
     "dev": "start-test 3000 cy:open",
-    "ci": "start-test 3000"
+    "ci": "start-test 3000",
+    "lint": "tsc --noEmit --pretty"
   },
   "browserslist": {
     "production": [

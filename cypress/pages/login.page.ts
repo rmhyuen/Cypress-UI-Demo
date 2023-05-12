@@ -11,7 +11,7 @@ export const LoginPage = {
     getError() {
         return cy.get('[data-test=error]')
     },
-    login(username, password) {
+    login(username: string, password: string) {
         cy.session('user session', () => {
             cy.log('** login **')
             cy.visit('/')
@@ -41,7 +41,7 @@ export const LoginPage = {
         .and('be.visible')
       LoginPage.getError().should('not.exist')
     },
-    hasErrors(errorMsg){
+    hasErrors(errorMsg: string){
         cy.log('** check that there are errors **')
         LoginPage.getError()
         .should('be.visible')
