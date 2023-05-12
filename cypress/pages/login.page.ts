@@ -28,7 +28,17 @@ export const LoginPage = {
                 .click()
             cy.location('pathname')
                 .should('equal', '/inventory.html')
-        })
+        }, 
+        {
+            validate() {
+                cy.log('**validate login session**')
+                // try visiting the page and
+                // confirm the browser stays at /inventory.html
+                cy.visit('/inventory.html', { failOnStatusCode: false })
+                cy.location('pathname').should('equal', '/inventory.html')
+              }
+        }
+        )
         cy.visit('/inventory.html')
         cy.location('pathname').should('equal', '/inventory.html')
     },
