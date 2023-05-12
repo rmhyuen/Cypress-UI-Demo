@@ -80,7 +80,7 @@ describe('Swag Labs', { viewportHeight: 1200 }, () => {
         })
     })
 
-    it.only('should add items to cart', () => {
+    it('should add items to cart', () => {
       InventoryPage.getShoppingCartBadge()
         .should('not.exist')
 
