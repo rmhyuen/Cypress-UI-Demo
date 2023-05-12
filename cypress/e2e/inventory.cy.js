@@ -22,6 +22,17 @@ describe('Swag Labs', () => {
       LoginPage.login(standard.username, standard.password)
     })
 
+    it.only('should have unique data item ids', () => {
+      cy.get('.inventory_item')
+        .invoke('toArray')
+        .mapInvoke('getAttribute', 'data-itemid')
+        .print('ids %o')
+        .should(ids => {
+          const unique = Cypress._.uniq(ids)
+          expect(unique).to.deep.equal(ids)
+        })
+    })
+
     it('should validate all items in the standard user inventory list', () => {
       cy.get('.inventory_list').as('inventoryList')
       standardUserInventoryList.forEach((item) => {
