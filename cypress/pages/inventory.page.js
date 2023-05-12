@@ -8,6 +8,12 @@ export const InventoryPage = {
     getInventoryItemName(){
       return cy.get('.inventory_item_name')  
     },
+    getShoppingCartLink(){
+        return cy.get('.shopping_cart_link')
+    },
+    getShoppingCartBadge(){
+        return InventoryPage.getShoppingCartLink().find('.shopping_cart_badge')
+    },
     /**
      * 
      * @param {'a-z', 'z-a', 'lohi', 'hilo'} order 
@@ -34,5 +40,17 @@ export const InventoryPage = {
             .should('be.visible')
             .map('innerText')
             .print('names %o')
+    },
+    addItemToCart(inventoryItemName){
+        cy.log(`** add "${inventoryItemName}" to cart **`)
+        return cy.contains('.inventory_item', inventoryItemName)
+        .within(() => {
+          cy.contains('button', 'Add to cart')
+            .as('addToCart')
+            .click()
+          cy.get('@addToCart').should('not.exist')
+          cy.contains('button', 'Remove')
+            .should('be.visible')
+        })
     }
 }

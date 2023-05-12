@@ -16,13 +16,13 @@ if(!standard) {
   throw new Error('Missing the username')
 }
 
-describe('Swag Labs', () => {
+describe('Swag Labs', { viewportHeight: 1200 }, () => {
   context('Inventory', () => {
     beforeEach(() => {
       LoginPage.login(standard.username, standard.password)
     })
 
-    it.only('should have unique data item ids', () => {
+    it('should have unique data item ids', () => {
       cy.get('.inventory_item')
         .invoke('toArray')
         .mapInvoke('getAttribute', 'data-itemid')
@@ -78,6 +78,27 @@ describe('Swag Labs', () => {
           const sorted = Cypress._.orderBy(names, 'desc')
           expect(names, 'sorted names').to.deep.equal(sorted)
         })
+    })
+
+    it.only('should add items to cart', () => {
+      InventoryPage.getShoppingCartBadge()
+        .should('not.exist')
+
+      InventoryPage.addItemToCart('Sauce Labs Bike Light')
+      
+      InventoryPage.getShoppingCartBadge()
+        .should('have.text', 1)
+        .scrollIntoView()
+        .and('be.visible')
+
+      InventoryPage.addItemToCart('Sauce Labs Bolt T-Shirt')
+      
+      InventoryPage.getShoppingCartBadge()
+        .should('have.text', 2)
+        .scrollIntoView()
+        .and('be.visible')
+
+      cy.get('.inventory_item:contains("Remove")').should('have.length', 2)
     })
   })
 })
