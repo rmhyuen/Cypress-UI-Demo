@@ -32,10 +32,18 @@ export const LoginPage = {
         {
             validate() {
                 cy.log('**validate login session**')
-                // try visiting the page and
-                // confirm the browser stays at /inventory.html
-                cy.visit('/inventory.html', { failOnStatusCode: false })
-                cy.location('pathname').should('equal', '/inventory.html')
+                cy.getCookie('session-username').then((cookie) => {
+                    if(!cookie){
+                        return false
+                    }
+                })
+                //Here are two other options to do the same valiation
+                
+                //1. casting null to false
+                //cy.getCookie('session-username').then(Boolean)
+                
+                //2. using asseration
+                //cy.getCookie('session-username').should('exist')
               }
         }
         )
