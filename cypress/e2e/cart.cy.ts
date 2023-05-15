@@ -1,5 +1,6 @@
 import { LoginPage } from '../pages/login.page'
 import { InventoryPage } from '../pages/inventory.page'
+import { CartPage } from '../pages/cart.page'
 
 /**
  * create a small type on the fly using jsdoc comment
@@ -23,7 +24,7 @@ describe('Cart', () => {
     LoginPage.login(user.username, user.password)
   })
 
-  it('should shows the added items in order they were added',
+  it('should show the added items in order they were added',
     { viewportHeight: 1200 },
     () => {
       const items = [
@@ -53,7 +54,7 @@ describe('Cart', () => {
 
       //
       // confirm the cart items list has the right number of elements
-      cy.get('.cart_item')
+      CartPage.getCartItems()
         .should('have.length', items.length)
         .as('cartItems')
       cy.log('**shows each item in order**')
@@ -72,5 +73,54 @@ describe('Cart', () => {
             cy.contains('.inventory_item_name', itemName)
           })
       })
+  })
+
+  it('removes items from cart', { viewportHeight: 1200 }, () => {
+    // using the inventory page object
+    // add 'Sauce Labs Bike Light' and 'Sauce Labs Bolt T-Shirt' items
+    const items = 
+    [
+      'Sauce Labs Bike Light', 
+      'Sauce Labs Bolt T-Shirt'
+    ]
+
+    items.forEach((item) => {
+      InventoryPage.addItemToCart(item)
+    })
+  
+    //
+    // the cart icon should show badge with number 2
+    InventoryPage.getInventoryItemRemoveButtons().should('have.length', items.length)
+    InventoryPage.getShoppingCartBadge()
+      .should('have.text', items.length)
+      .scrollIntoView()
+      .and('be.visible')
+      .click()
+
+    // and once you click it, you should transition to the cart page
+    cy.log('**we are on the cart page**')
+    cy.location('pathname').should('equal', '/cart.html')
+
+    // there should 2 items in the cart
+    CartPage.getCartItems().should('have.length', items.length)
+
+    cy.log('**remove the Bike Light**')
+    // find the cart item with text "Bike Light"
+    // and click the Remove button
+
+    cy.contains('.cart_item', items[0])
+      .find('[data-test^=remove-]')
+      .should('be.visible')
+      .click()
+
+    cy.log('**the T-shirt item still remains**')
+    CartPage.getCartItems()
+      .should('have.length', 1)
+      .contains(items[1])
+    // there should be a single cart item
+    // and it should have text "Bolt T-Shirt"
+    // the cart badge should show number 1
+    InventoryPage.getShoppingCartBadge()
+      .should('have.text', 1)
   })
 })
