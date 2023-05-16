@@ -1,7 +1,7 @@
 import { LoginPage } from '../pages/login.page'
 import { InventoryPage } from '../pages/inventory.page'
 import { CartPage } from '../pages/cart.page'
-import StanardUserInventoryList from '../fixtures/standardUserInventoryList.json'
+import { InventoryData } from '../../src/utils/InventoryData'
 
 /**
  * create a small type on the fly using jsdoc comment
@@ -25,20 +25,20 @@ describe('Cart', () => {
     LoginPage.login(user.username, user.password)
   })
 
-  it.only('should show the added items in order they were added',
+  it('should show the added items in order they were added',
     { viewportHeight: 1200 },
     () => {
       // add each item to cart using the InventoryPage object
       cy.log('**added all items to cart**')
-      StanardUserInventoryList.forEach(item => {
+      InventoryData.forEach(item => {
         InventoryPage.addItemToCart(item.name)
       })
       // confirm the cart badge shows the right number of items
       // then click on it
       // https://on.cypress.io/click
-      InventoryPage.getInventoryItemRemoveButtons().should('have.length', StanardUserInventoryList.length)
+      InventoryPage.getInventoryItemRemoveButtons().should('have.length', InventoryData.length)
       InventoryPage.getShoppingCartBadge()
-        .should('have.text', StanardUserInventoryList.length)
+        .should('have.text', InventoryData.length)
         .scrollIntoView()
         .and('be.visible')
         .click()
@@ -51,7 +51,7 @@ describe('Cart', () => {
       //
       // confirm the cart items list has the right number of elements
       CartPage.getCartItems()
-        .should('have.length', StanardUserInventoryList.length)
+        .should('have.length', InventoryData.length)
         .as('cartItems')
       cy.log('**shows each item in order**')
       // iterate over the items
@@ -61,7 +61,7 @@ describe('Cart', () => {
       // https://on.cypress.io/eq
       // and confirm that within the item the name
       // is correct and the quantity is 1
-      StanardUserInventoryList.forEach((item, i) => {
+      InventoryData.forEach((item, i) => {
         cy.get('@cartItems')
           .eq(i)
           .within(() => {
@@ -73,7 +73,7 @@ describe('Cart', () => {
     //check the ids in local storage
     let idList: number[] = []
 
-    StanardUserInventoryList.forEach((item) => {
+    InventoryData.forEach((item) => {
       idList.push(item.id)
     })
 
@@ -84,7 +84,7 @@ describe('Cart', () => {
     //@ts-ignore
     .then(JSON.parse)
     .should('deep.equal', idList)
-    .and('have.length', StanardUserInventoryList.length)
+    .and('have.length', InventoryData.length)
   })
 
   it('removes items from cart', { viewportHeight: 1200 }, () => {
