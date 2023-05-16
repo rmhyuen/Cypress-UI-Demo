@@ -73,6 +73,16 @@ describe('Cart', () => {
             cy.contains('.inventory_item_name', itemName)
           })
       })
+
+    //check local storage
+    cy.window()
+    .its('localStorage')
+    .invoke('getItem', 'cart-contents')
+    .should('exist')
+    //@ts-ignore
+    .then(JSON.parse)
+    .should('deep.equal', [0, 1, 2])
+    .and('have.length', items.length)
   })
 
   it('removes items from cart', { viewportHeight: 1200 }, () => {
@@ -122,5 +132,16 @@ describe('Cart', () => {
     // the cart badge should show number 1
     InventoryPage.getShoppingCartBadge()
       .should('have.text', 1)
+
+    //check local storage
+    cy.window()
+      .its('localStorage')
+      .invoke('getItem', 'cart-contents')
+      .should('exist')
+      //cart-contents is stingified JSON
+      //@ts-ignore
+      .then(JSON.parse)
+      .should('deep.equal', [1])
+      .and('have.length', 1)
   })
 })
