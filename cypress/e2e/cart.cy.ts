@@ -146,4 +146,25 @@ describe('Cart', () => {
       .should('deep.equal', [1])
       .and('have.length', 1)
   })
+
+  it('should set test data in local storage, navigate to the cart page, and verify the items', ({ viewportHeight: 1200 }), () => {
+    let idList: number[] = []
+    InventoryData.forEach((item) => {
+      idList.push(item.id)
+    })
+    cy.window().its('localStorage').invoke('setItem', 'cart-contents', JSON.stringify(idList))
+    cy.visit('/cart.html')
+    CartPage.getCartItems()
+      .as('cartItems')
+      .should('have.length', idList.length)
+
+    InventoryData.forEach((item, i) => {
+      cy.get('@cartItems')
+        .eq(i)
+        .within(() => {
+          cy.contains('.inventory_item_name', InventoryData[i].name)
+          cy.contains('.cart_quantity', 1)
+        })
+    })
+  })
 })
