@@ -43,24 +43,7 @@ describe('Checkout', () => {
     // and click the "Continue" element after confirming
     // the "Continue" element has the right "value" attribute
     // https://on.cypress.io/within
-    cy.get('.checkout_info_wrapper').within(() => {
-      cy.get('[data-test=firstName]')
-        .should('be.visible')
-        .and('have.attr', 'placeholder', 'First Name')
-        .type('Joe')
-    cy.get('[data-test=lastName]')
-      .should('be.visible')
-      .and('have.attr', 'placeholder', 'Last Name')
-      .type('Smith')
-    cy.get('[data-test=postalCode]')
-      .should('be.visible')
-      .and('have.attr', 'placeholder', 'Zip/Postal Code')
-      .type('90210')
-    cy.get('[data-test=continue]')
-      .should('be.visible')
-      .and('have.attr', 'value', 'Continue')
-      .click()
-    })
+    cy.fillForm()
     //
     // we should be on the checkout step two page
     // https://on.cypress.io/location

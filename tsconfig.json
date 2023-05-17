@@ -13,6 +13,7 @@
   "include": [
     "cypress/e2e/*.js", 
     "cypress/e2e/*.ts",
+    "cypress/support/*.ts",
     "cypress/**/*",
     "fixtures/**/*"
   ]
