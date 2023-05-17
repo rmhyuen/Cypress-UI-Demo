@@ -77,3 +77,7 @@ export class ShoppingCart {
 }
 
 ShoppingCart.LISTENERS = [];
+
+if(window.Cypress){
+  window.ShoppingCart = ShoppingCart
+}
