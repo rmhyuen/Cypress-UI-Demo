@@ -21,17 +21,7 @@ describe('Swag Labs', () => {
     it('should validate locked out user', () => {
       cy.visit('/')
       LoginPage.noErrors()
-      LoginPage.getUsername()
-          .should('be.visible')
-          .and('have.attr', 'placeholder', 'Username')
-          .type(lockedOut.username);
-      LoginPage.getPassword()
-          .should('be.visible')
-          .and('have.attr', 'placeholder', 'Password')
-          .type(lockedOut.password, { log: false})
-      LoginPage.getLoginButton()
-          .should('be.visible')
-          .click()
+      LoginPage.fillLoginForm(lockedOut.username, lockedOut.password)
       cy.location('pathname').should('equal', '/')
 
       LoginPage.hasErrors('Epic sadface: Sorry, this user has been locked out.')
@@ -47,7 +37,7 @@ describe('Swag Labs', () => {
 
     it('should not allow empty username', () => {
       cy.visit('/')
-      LoginPage.getLoginButton()
+      cy.get(LoginPage.selectors.loginButton)
         .should('be.visible')
         .click()
       LoginPage.hasErrors('Epic sadface: Username is required')
@@ -56,8 +46,8 @@ describe('Swag Labs', () => {
 
     it('should not allow empty password', () => {
       cy.visit('/')
-      LoginPage.getUsername().type('username')
-      LoginPage.getLoginButton()
+      cy.get(LoginPage.selectors.username).type('username')
+      cy.get(LoginPage.selectors.loginButton)
         .should('be.visible')
         .click()
       LoginPage.hasErrors('Epic sadface: Password is required')
