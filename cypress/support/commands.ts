@@ -24,12 +24,15 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('fillForm', (firstName: string = 'Joe', lastName: string = 'Smith', postalCode: string = '90210') => {
-    cy.get('form').within(() => {
-        cy.get('[data-test=firstName]')
-          .should('be.visible')
-          .and('have.attr', 'placeholder', 'First Name')
-          .type(firstName)
+Cypress.Commands.add(
+  'fillForm', 
+  { prevSubject: 'element' },
+  ($form, firstName: string = 'Joe', lastName: string = 'Smith', postalCode: string = '90210') => {
+    cy.wrap($form, { log: false }).within(() => {
+      cy.get('[data-test=firstName]')
+        .should('be.visible')
+        .and('have.attr', 'placeholder', 'First Name')
+        .type(firstName)
       cy.get('[data-test=lastName]')
         .should('be.visible')
         .and('have.attr', 'placeholder', 'Last Name')
