@@ -1,5 +1,5 @@
-import { LoginPage } from '../pages/login.page'
-import { InventoryPage } from '../pages/inventory.page'
+import { LoginPage } from '../support/pages/login.page'
+import { InventoryPage } from '../support/pages/inventory.page'
 
 describe('Cart', () => {
   interface LoginInfo{

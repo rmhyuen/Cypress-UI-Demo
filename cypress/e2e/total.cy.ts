@@ -1,6 +1,6 @@
-import { LoginPage } from '../pages/login.page'
+import { LoginPage } from '../support/pages/login.page'
 import { InventoryData } from '../../src/utils/InventoryData'
-import { CheckoutPage } from '../pages/checkout.page'
+import { CheckoutPage } from '../support/pages/checkout.page'
 
 describe('Checkout', () => {
   interface LoginInfo{

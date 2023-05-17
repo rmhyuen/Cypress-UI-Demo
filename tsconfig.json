@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@support/*": ["../cypress/support/*"],
+      "@fixtures": ["../cypress/fixtures/*"],
+      "@pages": ["../cypress/support/pages/*"]
+    },
     "types": ["cypress", "cypress-map"],
     "moduleResolution": "node",
     "resolveJsonModule": true,

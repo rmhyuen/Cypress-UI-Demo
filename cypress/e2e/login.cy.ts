@@ -1,4 +1,4 @@
-import { LoginPage } from '../pages/login.page'
+import { LoginPage } from '../support/pages/login.page'
 
 /** @type {{username: string, password: string}} */
 const standard = Cypress.env('users').standard

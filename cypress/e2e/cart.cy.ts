@@ -1,6 +1,6 @@
-import { LoginPage } from '../pages/login.page'
-import { InventoryPage } from '../pages/inventory.page'
-import { CartPage } from '../pages/cart.page'
+import { LoginPage } from '../support/pages/login.page'
+import { InventoryPage } from '../support/pages/inventory.page'
+import { CartPage } from '../support/pages/cart.page'
 import { InventoryData } from '../../src/utils/InventoryData'
 
 /**
