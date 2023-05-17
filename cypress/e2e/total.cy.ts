@@ -1,5 +1,6 @@
 import { LoginPage } from '../pages/login.page'
 import { InventoryData } from '../../src/utils/InventoryData'
+import { CheckoutPage } from '../pages/checkout.page'
 
 describe('Checkout', () => {
   interface LoginInfo{
@@ -43,12 +44,7 @@ describe('Checkout', () => {
     // and click the "Continue" element after confirming
     // the "Continue" element has the right "value" attribute
     // https://on.cypress.io/within
-    cy.get('.checkout_info_wrapper form')
-    .fillForm({
-      '#first-name': 'Joe',
-      '#last-name': 'Smith',
-      '#postal-code':'90210'
-    })    .submit()
+    CheckoutPage.fillInformationForm().submit()
     //
     // we should be on the checkout step two page
     // https://on.cypress.io/location
