@@ -50,7 +50,7 @@ describe('Checkout', () => {
       })
     //
     // click on the Checkout button
-    cy.contains('[data-test=checkout]', 'Checkout')
+    cy.containsByTest('checkout', 'Checkout')
       .scrollIntoView()
       .should('be.visible')
       .click()
@@ -75,7 +75,7 @@ describe('Checkout', () => {
     // https://on.cypress.io/contains
     // tip: I like using cy.contains with selector and text
     // to avoid accidental text match and confirm the button's caption text
-    cy.contains('[data-test=finish]', 'Finish')
+    cy.containsByTest('finish', 'Finish')
       .scrollIntoView()
       .click()
     //

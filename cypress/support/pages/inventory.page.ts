@@ -1,6 +1,6 @@
 export const InventoryPage = {
     getProductSortContainer(){
-        return cy.get('[data-test=product_sort_container]')
+        return cy.getByTest('product_sort_container')
     },
     getInventoryItemPrice(){
         return cy.get('.inventory_item_price')

@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add(
-  'fillForm', 
+  'fillForm',
   { prevSubject: 'element' },
   ($form, inputs) => {
     cy.wrap($form, { log: false }).within(() => {
@@ -35,5 +35,13 @@ Cypress.Commands.add(
           .type(value)
       })
     })
+  }
+)
 
+Cypress.Commands.add('getByTest', (testId: string) => {
+  return cy.get(`[data-test=${testId}]`)
+})
+
+Cypress.Commands.add('containsByTest', (testId: string, text: string = '') => {
+  return cy.contains(`[data-test=${testId}]`, text)
 })
