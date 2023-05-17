@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('fillForm', (firstName: string = 'Joe', lastName: string = 'Smith', postalCode: string = '90210') => {
-    cy.get('.checkout_info_wrapper').within(() => {
+    cy.get('form').within(() => {
         cy.get('[data-test=firstName]')
           .should('be.visible')
           .and('have.attr', 'placeholder', 'First Name')
@@ -38,9 +38,5 @@ Cypress.Commands.add('fillForm', (firstName: string = 'Joe', lastName: string = 
         .should('be.visible')
         .and('have.attr', 'placeholder', 'Zip/Postal Code')
         .type(postalCode)
-      cy.get('[data-test=continue]')
-        .should('be.visible')
-        .and('have.attr', 'value', 'Continue')
-        .click()
       })
 })
