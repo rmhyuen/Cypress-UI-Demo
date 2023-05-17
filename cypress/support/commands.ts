@@ -27,19 +27,13 @@
 Cypress.Commands.add(
   'fillForm', 
   { prevSubject: 'element' },
-  ($form, firstName: string = 'Joe', lastName: string = 'Smith', postalCode: string = '90210') => {
+  ($form, inputs) => {
     cy.wrap($form, { log: false }).within(() => {
-      cy.get('[data-test=firstName]')
-        .should('be.visible')
-        .and('have.attr', 'placeholder', 'First Name')
-        .type(firstName)
-      cy.get('[data-test=lastName]')
-        .should('be.visible')
-        .and('have.attr', 'placeholder', 'Last Name')
-        .type(lastName)
-      cy.get('[data-test=postalCode]')
-        .should('be.visible')
-        .and('have.attr', 'placeholder', 'Zip/Postal Code')
-        .type(postalCode)
+      Cypress._.forEach(inputs, (value, selector) => {
+        cy.get(selector.toString())
+          .should('be.visible')
+          .type(value)
       })
+    })
+
 })
